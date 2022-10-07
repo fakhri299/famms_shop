@@ -1,0 +1,219 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<body class="sub_page">
+   <div class="hero_area">
+   </div>
+   <!-- inner page section -->
+   <section class="inner_page_head">
+      <div class="container_fuild">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="full">
+                  <h4>{{product.name}}</h4>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- end inner page section -->
+   <!-- product section -->
+   <section class="product_section layout_padding">
+      <div class="container">
+         <div class="heading_container heading_center">
+            <h2>
+               Məhsul <span>haqqında</span>
+            </h2>
+         </div>
+         <div class="row">
+
+            <div class="col-sm-10 col-md-20 col-lg-20">
+               <div class="box">
+                  <div class="option_container">
+                     <div class="options">
+                        {% if user.is_authenticated %}
+                        {% if product in bought_products %}
+                        <button type="submit" class="btn btn-outline-danger rounded-0" data-toggle="modal"
+                           data-target="#deleteProducts">
+                           <span>Səbətdən Sil</span>
+                        </button>
+                        {% else %}
+                        <button type="submit" class="btn btn-outline-success rounded-0" data-toggle="modal"
+                           data-target="#buyProducts">
+                           <span>İndi Al</span>
+                        </button>
+                        {% endif %}
+                        {% endif %}
+                     </div>
+                  </div>
+                  <div class="img-box">
+                     <img src="{{product.image.url}}" alt="">
+                  </div>
+                  <div class="detail-box">
+                     <h6>
+                        <B>Məhsulun ölçüsü </B>: {{product.size}}
+                     </h6>
+                     <h6>
+                        <B>Məhsulun markası</B>: {{product.model}}
+                     </h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+   </section>
+
+   <div class="container">
+      <div class="product-description d-flex mb-5">
+         <div class="product-desc-1">
+            <div class="footer_contact">
+               <h5>Product features</h5>
+               <span>
+                  {{product.description.product_features}} <br>
+               </span>
+               <br>
+               <h5>Product Detail</h5>
+               <span>
+                  {{product.description.product_detail}}
+               </span>
+               <br>
+            </div>
+         </div>
+
+         <div class="product-desc-1">
+            <div class="footer_detail" style="margin-bottom: 30px;">
+               <h5>About the brend</h5>
+               <span style="margin-top: 20px;margin-bottom: 30px;">
+                  {{product.description.about_brend}}
+               </span>
+               <br>
+            </div>
+            <div>
+               <h5>Editor's Note</h5>
+               <span>
+                  {{product.description.editor_note}}
+               </span>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- <div class="container">
+      <div class="row">
+         <div class="col-md-4 footer-col">
+            <div class="footer_contact" >
+               <h5>Product features</h5>
+               <span >
+               {{product.description.product_features}} <br>
+               </span>
+               <br>
+               <h5>Product Detail</h5>
+                <span>
+               {{product.description.product_detail}}
+                </span>
+                <br>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-md-5 footer-col"  style="margin-top: 20px;margin-bottom: 30px;">
+      <div class="row"  style="margin-top: 20px;margin-bottom: 30px;">
+          <div class="footer_detail" style= "margin-top: 20px;margin-bottom: 30px;">
+         <h5>About the brend</h5>
+         <span   style="margin-top: 20px;margin-bottom: 30px;">
+
+            {{product.description.about_brend}}
+         </span>
+         <br>
+          </div>
+      </div>
+   </div>
+   <div class="col-md-5"  style="margin-top: 20px;margin-bottom: 30px;">
+      <div>
+         <h5>Editor's Note</h5>
+         <span>
+            {{product.description.editor_note}}
+         </span>
+      </div>
+   </div> -->
+
+   <!-- <div class="col-md-3 footer-col">
+         <div class="footer_detail">
+            <div class="footer-logo">
+                <h4><b>Editor's Note</b></h4>
+            </div>
+            {% for des in description %}
+            <p>
+               {{des.editor_note}}
+            </p>
+            {% endfor %}
+         </div>
+   </div> -->
+   <!-- end product section -->
+
+
+   <!-- BUY PRODUCT Modal -->
+   <div class="modal fade" id="buyProducts" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h2 class="modal-title" id="buyProductsLabel">Buy Product</h2>
+               <button type="button" class="close" data-dismiss="modal">
+                  <span>&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <p>You will buy the product below: </p>
+               <h1>{{ product.name }}</h1>
+            </div>
+            <div class="modal-footer"></div>
+            <form action="{% url 'buy_products' %}" method="POST">
+               {% csrf_token %}
+               <input type="hidden" name="user_id" value="{{user.id}}">
+               <input type="hidden" name="product_id" value="{{product.id}}">
+               <input type="submit" value="I AM SURE" class="btn btn-success">
+            </form>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+               CANCEL
+            </button>
+         </div>
+      </div>
+   </div>
+   <!--End Product Modal-->
+
+
+
+
+   <!--Delete Products-->
+   <div class="modal fade" id="deleteProducts" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h2 class="modal-title" id="deleteProducts">Delete the product</h2>
+               <button type="button" class="close" data-dismiss="modal">
+                  <span>&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <p>You will release the course below: </p>
+               <h1>{{ product.name }}</h1>
+            </div>
+            <div class="modal-footer"></div>
+            <form action="{% url 'delete_products' %}" method="POST">
+               {% csrf_token %}
+               <input type="hidden" name="user_id" value="{{user.id}}">
+               <input type="hidden" name="product_id" value="{{product.id}}">
+               <input type="submit" value="I AM SURE" class="btn btn-danger">
+            </form>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+               CANCEL
+            </button>
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>
+{% endblock %}

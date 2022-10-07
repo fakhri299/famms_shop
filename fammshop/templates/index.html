@@ -1,0 +1,256 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+      <div class="hero_area">
+         <!-- slider section -->
+         <section class="slider_section ">
+            <div class="slider_bg_box">
+               <img src="{% static 'images/slider-bg.jpg' %}" alt="">
+            </div>
+            <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <div class="container ">
+                        <div class="row">
+                           <div class="col-md-7 col-lg-6 ">
+                              <div class="detail-box">
+                                 <h1>
+                                    <span>
+                                   Hər məhsulda
+                                    </span>
+                                    <br>
+                                    20 %-ə qədər Endirim
+                                 </h1>
+                                 <p>
+                                  Ətraflı məlumat üçün bizimlə əlaqə bölməsindən öyrənə bilərsiniz.
+                                 </p>
+                                 <div class="btn-box">
+                                    <a href="{% url 'products' %}" class="btn1">
+                                    İndi Alış-Veriş Et
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <!-- <div class="carousel-item ">
+                     <div class="container ">
+                        <div class="row">
+                           <div class="col-md-7 col-lg-6 ">
+                              <div class="detail-box">
+                                 <h1>
+                                    <span>
+                                    Sale 20% Off
+                                    </span>
+                                    <br>
+                                    On Everything
+                                 </h1>
+                                 <p>
+                                    Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                                 </p>
+                                 <div class="btn-box">
+                                    <a href="{% url 'products' %}" class="btn1">
+                                    Shop Now
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="container ">
+                        <div class="row">
+                           <div class="col-md-7 col-lg-6 ">
+                              <div class="detail-box">
+                                 <h1>
+                                    <span>
+                                    Sale 20% Off
+                                    </span>
+                                    <br>
+                                    On Everything
+                                 </h1>
+                                 <p>
+                                    Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                                 </p>
+                                 <div class="btn-box">
+                                    <a href="{% url 'products' %}" class="btn1">
+                                    Shop Now
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="container">
+                  <ol class="carousel-indicators">
+                     <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+                     <li data-target="#customCarousel1" data-slide-to="1"></li>
+                     <li data-target="#customCarousel1" data-slide-to="2"></li>
+                  </ol>
+               </div>
+            </div> -->
+         </section>
+         <!-- end slider section -->
+      </div>
+      <br>
+      <br>
+<!-- inner page section -->
+      <body class="sub_page">
+         <div class="hero_area">
+         </div>
+         <section class="inner_page_head">
+            <div class="container_fuild">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="full">
+                        {% for item in categories %}
+                        <a href="{% url 'products-category' item.slug %}">{{item.name}}</a>
+                        {% endfor %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <!-- end inner page section -->
+
+        <!-- product section -->
+        <section class="product_section layout_padding">
+         <div class="container">
+            <div class="heading_container heading_center">
+               <h2>
+                  Yeni<span> məhsullarımız</span>
+               </h2>
+            </div>
+            <div class="row">
+                {% for product in last_products %}
+                
+               <div class="col-sm-6 col-md-4 col-lg-3">
+                  <div class="box">
+                     <div class="option_container">
+                        <div class="options">
+                           <a href="{% url 'products-detail' product.id  %}" class="option1">
+                           Ətraflı
+                           </a>
+                        </div>
+                     </div>
+                     <div class="img-box">
+                        <img src="{{product.image.url}}" alt="">
+                     </div>
+                     <div class="detail-box">
+                        <h5>
+                           {{product.name}}
+                        </h5>
+                        <h6>
+                           {{product.price}}
+                        </h6>
+                     </div>
+                  </div>
+               </div>
+              
+               {% endfor %}
+         </div>
+      </section>
+ <!-- end product section -->
+
+
+      <!-- client section
+      <section class="client_section layout_padding">
+         <div class="container">
+            <div class="heading_container heading_center">
+               <h2>
+                 Müştəri Məmnuniyyəti
+               </h2>
+            </div>
+            <div id="carouselExample3Controls" class="carousel slide" data-ride="carousel">
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <div class="box col-lg-10 mx-auto">
+                        <div class="img_container">
+                           <div class="img-box">
+                              <div class="img_box-inner">
+                                 <img src="{% static 'images/client.jpg' %}" alt="">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="detail-box">
+                           <h5>
+                              Anna Trevor
+                           </h5>
+                           <h6>
+                              Customer
+                           </h6>
+                           <p>
+                              Dignissimos reprehenderit repellendus nobis error quibusdam? Atque animi sint unde quis reprehenderit, et, perspiciatis, debitis totam est deserunt eius officiis ipsum ducimus ad labore modi voluptatibus accusantium sapiente nam! Quaerat.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="box col-lg-10 mx-auto">
+                        <div class="img_container">
+                           <div class="img-box">
+                              <div class="img_box-inner">
+                                 <img src="{% static 'images/client.jpg' %}" alt="">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="detail-box">
+                           <h5>
+                              Anna Trevor
+                           </h5>
+                           <h6>
+                              Customer
+                           </h6>
+                           <p>
+                              Dignissimos reprehenderit repellendus nobis error quibusdam? Atque animi sint unde quis reprehenderit, et, perspiciatis, debitis totam est deserunt eius officiis ipsum ducimus ad labore modi voluptatibus accusantium sapiente nam! Quaerat.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="box col-lg-10 mx-auto">
+                        <div class="img_container">
+                           <div class="img-box">
+                              <div class="img_box-inner">
+                                 <img src="{% static 'images/client.jpg' %}" alt="">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="detail-box">
+                           <h5>
+                              Anna Trevor
+                           </h5>
+                           <h6>
+                              Customer
+                           </h6>
+                           <p>
+                              Dignissimos reprehenderit repellendus nobis error quibusdam? Atque animi sint unde quis reprehenderit, et, perspiciatis, debitis totam est deserunt eius officiis ipsum ducimus ad labore modi voluptatibus accusantium sapiente nam! Quaerat.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel_btn_box">
+                  <a class="carousel-control-prev" href="#carouselExample3Controls" role="button" data-slide="prev">
+                  <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                  <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExample3Controls" role="button" data-slide="next">
+                  <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                  <span class="sr-only">Next</span>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </section>
+      client section -->
+       
+   
+    
+     
+{% endblock %}

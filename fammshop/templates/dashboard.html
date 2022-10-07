@@ -1,0 +1,76 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+	
+<body class="sub_page">
+    <div class="hero_area">
+    </div>
+    <!-- inner page section -->
+    <section class="inner_page_head">
+       <div class="container_fuild">
+          <div class="row">
+             <div class="col-md-12">
+                <div class="full">
+                   <h3>Səbətdəki Paltarlarınız</h3>
+                </div>
+             </div>
+          </div>
+       </div>
+    </section>
+
+    <section class="product_section layout_padding">
+        <div class="container">
+           <div class="heading_container heading_center">
+              <h2>
+                 <b>{{user.first_name}} {{user.last_name}}</b>
+              </h2>
+           </div>
+
+        <div class="row"> 
+            <div class="col-lg-12">
+                <h2 class="text-center my-5 "><b>{{ user.username }}</b>    Tərəfindən alınan məhsullar</h2>
+            </div>
+
+
+           {% for product in products %}
+
+           <div class="col-sm-6 col-md-4 col-lg-3">
+              <div class="box">
+                 <div class="option_container">
+                    <div class="options">
+                       <a href="{% url 'products-detail' product.pk  %}" class="option1">
+                       {{product.name}}
+                       </a>
+                       {% if user.is_authenticated %}
+                           {% if paltar in bought_products %}
+                       <button type="submit" class="btn btn-outline-danger rounded-0" data-toggle="modal"
+                              data-target="#deleteProducts">
+                        Delete Now
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                 </div>
+                 <div class="img-box">
+                    <img src="{{product.image.url}}" alt="">
+                 </div>
+                 <div class="detail-box">
+                    <h5>
+                       {{product.name}}
+                    </h5>
+                    <h6>
+                       {{product.price}}
+                    </h6>
+                 </div>
+              </div>
+           </div>
+
+            {% endfor %}
+
+        </div><!-- end row -->		
+    </div><!-- end container -->
+</div><!-- end section -->
+
+
+
+{% endblock %}

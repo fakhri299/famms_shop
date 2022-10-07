@@ -1,0 +1,106 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- Basic -->
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <!-- Mobile Metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <!-- Site Metas -->
+      <meta name="keywords" content="" />
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+      <link  href="{% static 'images/favicon.png' %}" rel=" icon" type="">
+      <title>Famms - Fashion HTML Template</title>
+      <!-- bootstrap core css -->
+      <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" />
+      <!-- font awesome style -->
+      <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+      <!-- Custom styles for this template -->
+      <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+      <!-- responsive style -->
+      <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+   </head>
+   <body class="sub_page">
+      <div class="hero_area">
+      <!-- header section strats -->
+      <header class="header_section">
+         <div class="container">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+               <a class="navbar-brand" href="{% url 'home' %}"><img width="250" src="{% static 'images/logo.png' %}" alt="#" /></a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class=""> </span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Ev <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item "><a class="nav-link" href="{% url 'products' %}">Məhsullar</a>
+                    </li>
+                    <li class="nav-item "><a class="nav-link" href="">Kataloq</a>
+                    </li>
+                     <li class="nav-item "><a class="nav-link" href="{% url 'about' %}">Haqqımızda</a>
+                     </li>
+                     <li class="nav-item "><a class="nav-link" href="{% url 'contact' %}">Bİzİmlə Əlaqə</a>
+                     </li>
+
+                     
+                     <!-- Kategoriyalar burdadir asagidakidir -->
+                     <!-- <div class="contain">
+                        <div class="row">
+                           {% for item in categories %}
+                           <div>
+                              <hr>
+                              <a href="{% url 'products-category' item.slug %}">{{item.name}}</a>
+                           </div>
+                            {% endfor %}
+                        </div>
+                     </div>  -->
+
+                  
+
+
+                     {% if user.is_authenticated %}
+                      <!--Bura dashboard yerlesdirecem-->
+                     <li class="nav-item"><a style="color:red;font-weight:bold;font-size:20px" class="hover-btn-new log orange mr-2" href="{% url 'dashboard' %}">{{user.username}}</a></li>
+                  </ul>
+
+                  
+                  <!--register and login-->
+                <li><a class="hover-btn-new log orange" href="javascript:{document.getElementById('logout').submit()}"><span><i class="fa fa-sign-out"></i></span></a>
+                    <form action="{% url 'logout' %}" method="POST" id="logout">
+                        {% csrf_token %}
+                        <input type="hidden">
+                    </form>
+                </li>
+                
+
+                {% else %}
+               </ul>
+                   <ul class="nav navbar-nav navbar-right">
+                       <li><a class="hover-btn-new log orange mr-4" href="{% url 'login' %}" ><span><i class="fa fa-sign-in"></i></span></a></li>
+                       <li><a class="hover-btn-new log orange" href="{% url 'register' %}" ><span><i class="fa fa-user-plus"></i></span></a></li>
+                   </ul>
+                   {% endif %}
+               </div>
+            </nav>
+            <div class="col-lg-5 col-12 right-single">
+					<div class="widget-search">
+						<div class="site-search-area">
+							<form method="GET" id="site-searchform" action="{% url 'search' %}">
+								<div>
+									<input class="input-text form-control" name="search"  placeholder="Search product..." type="text">
+									<input id="searchsubmit" value="Search"  type="submit">
+								</div>
+							</form>
+						</div>
+					</div> 
+
+               
+         </div>
+      </header>
+     
+       
