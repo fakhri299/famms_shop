@@ -1,0 +1,1 @@
+web gunicorn fammshop.wsgi: application --log-file -

@@ -33,7 +33,7 @@ def about(request):
 
 def search(request):
 
-   result=request.GET['search']
+   result=request.GET['search_product']
    
    products=Product.objects.filter(name__contains=result)
    

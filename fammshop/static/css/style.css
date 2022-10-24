@@ -10,6 +10,11 @@ body {
   overflow-x: hidden;
 }
 
+.btn-outline-success{
+  color:#002c3e !important;
+  border-color: #002c3e !important;
+}
+
 .layout_padding {
   padding: 70px 0;
 }
