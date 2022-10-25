@@ -108,9 +108,19 @@
                <div class="row">
                   <div class="col-md-12">
                      <div class="full">
-                        {% for item in categories %}
-                        <a href="{% url 'products-category' item.slug %}">{{item.name}}</a>
-                        {% endfor %}
+                        <div class="container">
+                           <div class="flex">
+                               <div class="nav">
+                                 {% for item in categories %}
+                                   <nav>
+                                       <ul>
+                                           <li><a href="{% url 'products-category' item.slug %}">{{item.name}}</a></li>
+                                       </ul>
+                                   </nav>
+                                   {% endfor %}
+                               </div>
+                           </div>
+                       </div>
                      </div>
                   </div>
                </div>
